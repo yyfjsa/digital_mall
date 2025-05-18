@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/digital_mall?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    druid:
+        initial-size: 5              # 初始化时创建的连接数
+        min-idle: 5                  # 最小空闲连接数
+        max-active: 20              # 最大连接数（并发高时最多多少个连接）
+        max-wait: 60000             # 连接等待的最大时间（毫秒）
+        time-between-eviction-runs-millis: 60000         # 多久检查一次空闲连接（ms）
+        min-evictable-idle-time-millis: 300000           # 最小可被清除的空闲连接时间（ms）
+        validation-query: SELECT 1   # 用于检测连接是否有效的 SQL
+        test-while-idle: true        # 空闲时检查连接
+        test-on-borrow: false        # 取连接时不检测（提高性能）
+        test-on-return: false        # 还连接时不检测（提高性能）
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+
+# 配置MybatisPlus
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.cow.entity
